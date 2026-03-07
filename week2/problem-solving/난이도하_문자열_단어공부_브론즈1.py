@@ -2,7 +2,7 @@
 # 문제 링크: https://www.acmicpc.net/problem/1157
 
 str = input().upper()
-cnt = [0]*26
+cnt = [0]*26d
 
 for c in str:
     cnt[ord(c)-65] += 1
