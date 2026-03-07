@@ -36,14 +36,27 @@ def is_palindrome(s):
     """
     # TODO: 알파벳과 숫자만 남기고 소문자로 변환하세요
     # 힌트: isalnum() 메서드와 lower() 메서드 사용
-    pass
+    cleaned_text= s.strip()
+    cleaned_text = "".join(char for char in s if char.isalnum())
+    cleaned_text = cleaned_text.lower()
     
     # TODO: 정제된 문자열이 회문인지 확인하세요
     # 방법1: 문자열을 뒤집어서 비교 ([::-1] 사용)
-    # 방법2: 양 끝 인덱스를 이용한 투 포인터 방식
-    pass
+    palindrome_text = cleaned_text[::-1]
+    if palindrome_text != cleaned_text:
+        return False
     
-    #return False
+    # 방법2: 양 끝 인덱스를 이용한 투 포인터 방식
+    idx = 0
+    reversed_idx = len(cleaned_text) - 1
+    
+    while(idx <= reversed_idx):
+        if(cleaned_text[idx] != cleaned_text[reversed_idx]):
+            return False
+        idx += 1
+        reversed_idx -= 1
+        
+    return True
 
 # 테스트 케이스
 if __name__ == "__main__":
