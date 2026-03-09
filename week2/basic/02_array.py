@@ -51,6 +51,7 @@ def rotate_matrix_90(matrix):
     for i in range(n):
         for j in range(n):
             rotated[i][j] = matrix[n-1-j][i]
+            rotated[j][n-1-i] = matrix[i][j]
     
     return rotated
 
