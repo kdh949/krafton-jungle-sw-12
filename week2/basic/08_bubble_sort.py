@@ -41,8 +41,13 @@ def bubble_sort(arr):
     ## TODO: 인접한 두 원소 비교 및 교환
     ## arr[j] > arr[j+1]이면 교환
     ## 외부 반복문: n-1번 실행
-    pass
-        
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if(arr[j] > arr[j+1]):
+                tmp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = tmp
+            
     return arr
 
 def bubble_sort_optimized(arr):
@@ -61,31 +66,46 @@ def bubble_sort_optimized(arr):
         swapped = False  # 교환 발생 여부
         
         # TODO: 내부 반복문과 교환 로직 구현
-        # 교환이 발생하면 swapped = True 설정        
-        pass
-        
+        # 교환이 발생하면 swapped = True 설정
+        for j in range(n-i-1):
+            if(arr[j] > arr[j+1]):
+                swapped = True
+                tmp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = arr[j]
 
         # TODO: 교환이 없으면 이미 정렬된 것이므로 break
-        pass
+        if not swapped: 
+            break
 
     return arr
 
 # 테스트 케이스
 if __name__ == "__main__":
+    import time
+    
     # 테스트 케이스 1
     arr1 = [64, 34, 25, 12, 22, 11, 90]
     print("=== 테스트 케이스 1 ===")
     print(f"정렬 전: {arr1}")
+    
+    start = time.time() #시간 측정 시작
     result1 = bubble_sort(arr1.copy())
-    print(f"정렬 후: {result1}")
+    end = time.time() #시간 측정 종료
+    
+    print(f"정렬 후: {result1}, 소요시간: {end - start:.7f} sec")
     print()
     
     # 테스트 케이스 2: 이미 정렬된 배열
     arr2 = [1, 2, 3, 4, 5]
     print("=== 테스트 케이스 2: 이미 정렬됨 ===")
     print(f"정렬 전: {arr2}")
+    
+    start = time.time() #시간 측정 시작
     result2 = bubble_sort_optimized(arr2.copy())
-    print(f"정렬 후: {result2}")
+    end = time.time() #시간 측정 종료
+    
+    print(f"정렬 후: {result2}, 소요시간: {end - start:.7f} sec")
     print("최적화 버전은 1번의 패스만 수행")
     print()
     
@@ -93,7 +113,10 @@ if __name__ == "__main__":
     arr3 = [5, 4, 3, 2, 1]
     print("=== 테스트 케이스 3: 역순 ===")
     print(f"정렬 전: {arr3}")
+    
+    start = time.time() #시간 측정 시작
     result3 = bubble_sort(arr3.copy())
-    print(f"정렬 후: {result3}")
-
+    end = time.time() #시간 측정 종료
+    
+    print(f"정렬 후: {result3}, 소요시간: {end - start:.7f} sec")
 
