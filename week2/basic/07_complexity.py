@@ -34,7 +34,12 @@ def find_duplicates_brute_force(nums):
     # TODO: 이중 반복문으로 중복 찾기
     ## i번째 원소와 i+1 이후의 모든 원소를 비교
     ## 같은 원소를 찾으면 duplicates에 추가 (중복 추가 방지 필요)
-    pass
+    
+    for i in range(n-1):
+        for j in range (i+1, n):
+            if (nums[i] == nums[j]):
+                if not nums[i] in duplicates:
+                    duplicates.append(nums[i])
     
     return duplicates
 
@@ -48,13 +53,19 @@ def find_duplicates_sorting(nums):
         return []
     
     # TODO: 배열을 정렬하세요 (nums.sort() 사용)
-    pass
-    
+    nums.sort() #오름차순 정렬
+
     duplicates = []
     
     # TODO: 인접한 원소를 비교하여 중복 찾기
     # i와 i+1 원소가 같고, duplicates에 없으면 추가
-    pass
+    n = len(nums)
+    
+    for i in range(n-1):
+        if (nums[i] == nums[i+1]) and not duplicates: # 중복 배열이 비어있을때
+            duplicates.append(nums[i])
+        elif(nums[i] == nums[i+1]) and duplicates[-1] != nums[i]:
+            duplicates.append(nums[i])
     
     return duplicates
 
@@ -70,15 +81,24 @@ def find_duplicates_hash(nums):
     # TODO: 각 원소를 순회하면서
     ## 이미 seen에 있으면 duplicates에 추가
     ## 없으면 seen에 추가
-    pass
+    for i in nums:
+        if i in seen:
+            duplicates.add(i)
+        else:
+            seen.add(i)
     
     return list(duplicates)
 
 def measure_time(func, nums, method_name):
     """실행 시간 측정 헬퍼 함수"""
+    import time
+    
+    start = time.time() #시간 측정 시작
     result = func(nums[:])  # 복사본 전달
+    end = time.time() #시간 측정 종료
+
     print(f"{method_name}: {sorted(result)}")
-    print()
+    print(f"{method_name}: {end - start:.6f} sec", end='\n\n')
 
 # 테스트 케이스
 if __name__ == "__main__":
