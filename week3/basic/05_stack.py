@@ -25,7 +25,7 @@
 - 마지막에 스택이 비어있으면 True
 """
 
-def is_valid_parentheses(s):
+def is_valid_parentheses(s: str):
     """
     괄호 짝이 맞는지 확인
     
@@ -42,10 +42,21 @@ def is_valid_parentheses(s):
     ## : 닫는 괄호 ')'면
     ## 스택이 비어있으면 False 반환
     ## 아니면 스택에서 pop
-    pass
+    for c in s:
+        if c == '(':
+            stack.append(c)
+        else:
+            if(stack):
+                stack.pop()
+            else:
+                return False
+            
     
     # TODO: 반복이 끝나면 스택이 비어있는지 확인
-    pass
+    if not stack:
+        return True
+    
+    return False
 
 # 테스트 케이스
 if __name__ == "__main__":
