@@ -42,7 +42,9 @@ def dfs(graph, start, visited=None):
     Returns:
         방문 순서 리스트
     """
+    # TODO: visited가 None이면 초기화
     if visited is None:
+        # 현재 코드의 if not visited:는 visited가 비어있는 리스트 []일 때도 참(True)으로 인식되어 visited = []로 다시 덮어씌웁니다.
         visited = []
     
     # TODO: 현재 정점 방문
@@ -70,4 +72,5 @@ if __name__ == "__main__":
     result = dfs(graph, 0)
     print(f"시작 정점: 0")
     print(f"방문 순서: {result}")
+
 
