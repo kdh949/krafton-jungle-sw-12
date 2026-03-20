@@ -45,16 +45,27 @@ def bfs(graph, start):
     """
     visited = []
     
-    # TODO: 큐 생성 및 시작 정점 추가
+    # 큐 생성 및 시작 정점 추가
     ## 방문한 정점 집합
-    pass
-
-    # TODO: 큐가 빌 때까지 반복
-    ## 큐에서 정점 꺼내기
-    ## 인접한 정점들 확인
-    ## 방문하지 않은 정점이면 큐에 추가
-    pass
+    queue = deque([start])
     
+
+    # 큐가 빌 때까지 반복
+    while queue:
+        node = queue.popleft()
+            ## 큐에서 정점 꺼내기
+        
+        nearby_vertex = graph[node]
+            ## 인접한 정점들 확인
+        
+        for vertex in nearby_vertex:
+            if vertex not in visited:
+                queue.append(vertex)
+                ## 방문하지 않은 정점이면 큐에 추가
+        
+        if node not in visited:
+            visited.append(node)
+
     return visited
 
 # 테스트 케이스
