@@ -46,17 +46,47 @@ def dfs(graph, start, visited=None):
     if visited is None:
         # 현재 코드의 if not visited:는 visited가 비어있는 리스트 []일 때도 참(True)으로 인식되어 visited = []로 다시 덮어씌웁니다.
         visited = []
-    
-    # TODO: 현재 정점 방문
-    visited.append(start)
-    
-    # TODO: 인접한 정점들에 대해 재귀
-    ## 방문하지 않은 정점이면 재귀 호출
-    for vertex in graph[start]:
-        if vertex not in visited:
-            dfs(graph, vertex, visited)
+
+    seen = set(visited)
+
+    def _dfs(vertex):
+        visited.append(vertex)
+        seen.add(vertex)
+
+        for next_vertex in graph[vertex]:
+            if next_vertex not in seen:
+                _dfs(next_vertex)
+
+    if start not in seen:
+        _dfs(start)
     
     return visited
+
+def dfs_stack(graph, start):
+    """
+    깊이 우선 탐색 (스택)
+    
+    Args:
+        graph: 그래프 딕셔너리
+        start: 현재 정점
+        visited: 방문 리스트
+    
+    Returns:
+        방문 순서 리스트
+    """
+    visited = [start]
+    stack = [start]
+        
+    while stack:
+        vertex = stack.pop()
+        
+        for node in graph[vertex]:
+            if node not in visited:
+                visited.append(node)
+                stack.append(node)
+
+    return visited
+
 
 # 테스트 케이스
 if __name__ == "__main__":
@@ -68,8 +98,13 @@ if __name__ == "__main__":
         3: [2]
     }
     
-    print("=== DFS (깊이 우선 탐색) ===")
+    print("=== DFS (깊이 우선 탐색 / 재귀) ===")
     result = dfs(graph, 0)
+    print(f"시작 정점: 0")
+    print(f"방문 순서: {result}")
+
+    print("=== DFS (깊이 우선 탐색 / 스택) ===")
+    result = dfs_stack(graph, 0)
     print(f"시작 정점: 0")
     print(f"방문 순서: {result}")
 
