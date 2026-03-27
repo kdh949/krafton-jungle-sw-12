@@ -6,6 +6,10 @@
 - 한 번에 1칸 또는 2칸을 오를 수 있습니다.
 - n번째 계단까지 오르는 경우의 수를 구합니다.
 
+### 
+# 만약 최대 4칸까지 오를 수 있다면,
+# fib(n) = fib(n-1) + fin(n-2) + fib(n-3) + fib(n-4)
+
 입력:
 - n: 계단의 수
 
@@ -46,14 +50,19 @@ def climb_stairs(n):
         n번째 계단까지 오르는 방법의 수
     """
     # TODO: 특별한 경우 처리
-    pass
+    if n == 1:
+        return 1
     
+    elif n == 2:
+        return 2
     
     # TODO: dp 배열 생성 및 초기화
-    pass
+    dp =[0] * (n+1)
+    dp[1], dp[2] = 1, 2
     
     # TODO: 작은 문제부터 차례로 계산
-    pass
+    for i in range(3, n+1):
+        dp[i] = dp[i-1] + dp[i-2]
     
     return dp[n]
 
