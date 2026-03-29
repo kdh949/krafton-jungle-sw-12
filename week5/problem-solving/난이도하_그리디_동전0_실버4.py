@@ -9,19 +9,13 @@ for i in range(n):
     coins[i] = int(input())
 
 result = 0
-# left_coins = k
+left_coins = k
 
-# for j in range(n-1, -1, -1):
-#     result += left_coins // coins[j]
-#     left_coins %= coins[j]
+for coin in coins[::-1]:
+    result += left_coins // coin
+    left_coins %= coin
     
-#     if left_coins == 0:
-#         break
-
-idx = n-1
-while(k>0):
-    result += k//coins[idx]
-    k %= coins[idx]
-    idx -= 1
+    if left_coins == 0:
+        break
 
 print(result)
