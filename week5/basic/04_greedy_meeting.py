@@ -32,20 +32,28 @@ def select_meetings(meetings):
     Returns:
         (배정된 회의 개수, 선택된 회의 리스트)
     """
-    # TODO: 회의가 없으면 0 반환
-    pass
+    # 회의가 없으면 0 반환
+    if not meetings:
+        return 0
     
-    # TODO: 종료 시간 기준으로 정렬
-    pass
+    # 종료 시간 기준으로 정렬
+    """
+    - 파이썬에서 튜플(또는 튜플 리스트)을 정렬할 때는 `sorted()` 함수와 `lambda`를 사용하여 정렬 기준 설정
+    - 기본적으로 첫 번째 요소를 기준으로 오름차순 정렬: `sorted()` 함수 사용
+    - **`sort(key=lambda x: x[n])`** 을 사용하여 특정 인덱스(n)를 기준으로 정렬할 수 있다.
+    """
+    meetings.sort(key=lambda x: x[1])
     
     selected = []
     
-    # TODO: 첫 번째 회의 선택
-    pass
+    # 첫 번째 회의 선택
+    selected.append(meetings[0])
     
-    # TODO: 나머지 회의들 확인
+    # 나머지 회의들 확인
     ## 이전 회의가 끝난 후 시작하는 회의만 선택
-    pass
+    for start, end in meetings[1:]: # 슬라이싱을 사용하여 첫 번째 원소부터 순회
+        if selected[-1][1] < start:
+            selected.append((start, end))
     
     return len(selected), selected
 
