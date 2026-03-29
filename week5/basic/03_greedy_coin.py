@@ -40,13 +40,18 @@ def make_change_greedy(change, coins):
     Returns:
         (총 개수, {동전: 개수} 딕셔너리)
     """
-    result = {}
+    result = {} # dict
     total_coins = 0
     
-    # TODO: 각 동전에 대해 반복
+    left_coins = change # 남은 코인
+    
+    # 각 동전에 대해 반복
     ## 현재 동전으로 거슬러줄 수 있는 개수 계산    
     ## 개수가 0보다 크면 결과에 추가
-    pass
+    for coin in coins:
+        result[coin] = left_coins // coin
+        left_coins %= coin
+        total_coins += 1
     
     return total_coins, result
 
